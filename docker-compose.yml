@@ -5,7 +5,7 @@ services:
   minecraft-tekkit:
     build: .
     ports:
-      - "26656:25565"
+      - "25565:25565"
     volumes:
       - "mc-tekkit:/data"
     environment:
@@ -14,8 +14,6 @@ services:
       MAX_MEM: "8G"
     restart: always
     labels:
-      - "traefik.frontend.rule=Host:mc-tekkit.stephan-makowski.de"
-      - "traefik.docker.network=www"
       - "--noconsole"
     networks:
       - www
