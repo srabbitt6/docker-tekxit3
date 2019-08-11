@@ -5,16 +5,18 @@ services:
   minecraft-tekkit:
     build: .
     ports:
-      - "25565:25565"
+      - "26656:25565"
+      - "26666:26666" # for rcon
     volumes:
       - "mc-tekkit:/data"
+      - "./server.properties:/data/server.properties"
     environment:
       EULA: "TRUE"
       INIT_MEM: "4G"
       MAX_MEM: "8G"
     restart: always
     labels:
-      - "--noconsole"
+      - "--nogui"
     networks:
       - www
 
