@@ -12,7 +12,7 @@ ENV MAX_MEM=8G
 RUN apt-get update -y && apt-get install unzip wget -y --no-install-recommends 
 RUN wget ${MEGA_URL} -O mc.zip
 RUN unzip mc.zip -d /data
-RUN mkdir /data
+#RUN mkdir /data
 #RUN mv -v data-temp/*/* /data
 #RUN mv -v data-temp/*/!(server.properties|ops.json|banned-ips.json|banned-players.json|whitelist.json|usercache.json) data/                
 #RUN mv -v data-temp/* data/                                                                                                                 
