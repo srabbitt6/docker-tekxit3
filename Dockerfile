@@ -4,10 +4,10 @@ WORKDIR /
 EXPOSE 25565
 
 # default url to start with
-ENV MEGA_URL=https://www.tekx.it/downloads/0.96Tekxit3Server.zip                                                                            
+ENV MEGA_URL=https://www.tekx.it/downloads/0.972Tekxit3Server.zip                                                                        
 # min memory use for this modpack
 ENV INIT_MEM=4G
-ENV MAX_MEM=4G
+ENV MAX_MEM=8G
 #update all the things
 RUN apt-get update -y && apt-get install unzip wget -y --no-install-recommends 
 RUN wget ${MEGA_URL} -O mc.zip
