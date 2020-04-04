@@ -1,29 +1,25 @@
-FROM openjdk:8-jdk                                                                                                                          
+FROM ubuntu:latest
+
 WORKDIR /
 
-EXPOSE 25565
+EXPOSE 25565 25565
 
 # default url to start with
-ENV MEGA_URL=https://www.tekx.it/downloads/0.972Tekxit3Server.zip
+ENV MEGA_URL=https://mega.nz/file/RKJEWa6R#scJUM_6p8GQRagN1xroebxwqCpdrV7QPjwIVqoUuyKQ
 # min memory use for this modpack
 ENV INIT_MEM=4G
+# max mem that we should let java use
 ENV MAX_MEM=8G
+
 #update all the things
-RUN apt-get update -y && apt-get install unzip wget -y --no-install-recommends 
-RUN wget ${MEGA_URL} -O mc.zip
-RUN mkdir /data
-RUN mkdir /data/data-temp
-RUN unzip mc.zip -d /data/data-temp
-RUN mv -v /data/data-temp/*/* /data
-#RUN mv -v data-temp/*/!(server.properties|ops.json|banned-ips.json|banned-players.json|whitelist.json|usercache.json) data/                
-RUN mv -v /data/data-temp/* data/                                                                                                                 
-RUN rm -r -f /data/data-temp                                                                                                                     
-RUN rm -r -f ./mc.zip                                                                                                                                                                                                                                                                   #startup script
-COPY ./start.sh start.sh    
+RUN apt-get update -y
+#install the things
+RUN apt-get install unzip megatools openjdk-8-jre -y
+#startup script
+COPY ./start.sh start.sh
 #make sure startup script can run
 RUN chmod +x ./start.sh
-
 #define the volume
 VOLUME [ "/data" ]
 #execute startup script on startup
-ENTRYPOINT [ "./start.sh" ]texkit
+ENTRYPOINT [ "./start.sh" ]
