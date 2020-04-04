@@ -1,6 +1,3 @@
 #!/bin/bash
-megadl --path=mc.zip ${MEGA_URL}     
-unzip mc.zip -d /data-temp  
-mv -v data-temp/*/* data/ && rm -r -f /data-temp && rm mc.zip
-jarfile=$(cd /data && ls|grep forge.jar)
-cd /data && java -server "-Xmx${INIT_MEM}" "-Xms${MAX_MEM}" -jar $jarfile nogui
+jarfile=$(cd /data && ls|grep forge-*.jar)
+cd /data && java -server "-Xms${INIT_MEM}" "-Xmx${MAX_MEM}" -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:MaxGCPauseMillis=100 -XX:+DisableExplicitGC -XX:TargetSurvivorRatio=90 -XX:G1NewSizePercent=50 -XX:G1MaxNewSizePercent=80 -XX:G1MixedGCLiveThresholdPercent=35 -XX:+AlwaysPreTouch -XX:+ParallelRefProcEnabled -jar $jarfile nogui
